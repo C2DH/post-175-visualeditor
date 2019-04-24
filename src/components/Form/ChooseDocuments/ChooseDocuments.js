@@ -119,7 +119,12 @@ ChooseDocuments.defaultProps = {
   multiSelection: true,
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state, rawProps) => {
+  // NOTE: This version this react (and react-redux and related stuff)
+  // is outdate so probably in current version this bug simply doesn't appends...
+  // But for now this line fix this
+  // the props passed 2 mapStateToProps are not merged \w defaultProps
+  let ownProps = { ...ChooseDocuments.defaultProps, ...rawProps }
   // State not related to current component
   if (state.ui.fullPageWidgets.namespace !== ownProps.fields.name) {
     return {}
